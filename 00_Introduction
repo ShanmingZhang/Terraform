@@ -1,7 +1,13 @@
-* Terraform is a tool for building, changing, and versioning cloud-based, software-based, hardware-based infrastructure
+* Terraform is a tool for building, changing, and versioning infrastructure
+  - Cloud-based 
+  - Software-based
+  - Hardware-based
+  - VMs-based
+  - Containers-baed
 
 * Configuration files describe to Terraform Job details
-
+  - can be used to manage a single application, or the entire datacenter.
+  
 * Terraform forcus on the desired state of infrastructure:
   - Translates the configuration files to generate execute plans
   - Execute plans to build the describeed infrastructure that realise the desired state
