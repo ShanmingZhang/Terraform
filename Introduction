@@ -1,0 +1,29 @@
+* Terraform is a tool for building, changing, and versioning cloud-based, software-based, hardware-based infrastructure
+
+* Configuration files describe to Terraform Job details
+
+* Terraform forcus on the desired state of infrastructure:
+  - Translates the configuration files to generate execute plans
+  - Execute plans to build the describeed infrastructure that realise the desired state
+  - Enable to what changed and create incremental execution plans
+  
+* Terrafrom can manage components:
+  - Low-level components: compute instances, storage, and networking...
+  - High-level components: DNS, SaaS, Database, Loadbalancer...
+  
+  
+* Features of Terraform:
+  - Infrastructure as Code
+    > Infrastructure is described using high-level configruation syntax (declarative code)
+    > Infrastructure can be shared and re-used
+  - Execution Plans
+    > Has a "planning" step to generate an execution plan
+  - Resource Graph
+    > Builds a graph of all your resources, and parallelizes the creation and modifications of any non-dependent resources
+    > Masterless mode
+  - Change Automation
+    > Forcus on the desired state of infrastructure described in configuration files
+    > Take account of previously mentioned execution plan and resource graph
+    > What and how will be changed and in what order to avoid possible human errors and to realize the desired state of infrastructure
+    
+  
