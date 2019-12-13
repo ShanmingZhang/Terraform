@@ -1,0 +1,17 @@
+1. Download
+    - wget https://releases.hashicorp.com/terraform/0.12.18/terraform_0.12.18_linux_amd64.zip
+
+2. Unzip
+    - unzip terraform_0.12.18_linux_amd64.zip
+
+
+3. Configuration
+    - edit /home/user_name/.profile
+        add the following line at last 
+        -----
+        export PATH="$PATH:terraform_file_path/terraform"
+        -----
+4. Verifying
+    - check 'terraform' command
+    - check 'terraform -help' command
+    - check 'terraform --help plan' command
