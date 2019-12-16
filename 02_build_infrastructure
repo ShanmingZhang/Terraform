@@ -27,7 +27,7 @@ Build infrastructure on AWS
      -- resource name
      
 * Initalization
- - command: 'terraform init'
+ - command: terraform init
  - first command to run for a new configuration or  after checking out an existing configuration from version control
  - initializes various local settings and data that will be used by subsequent commands
  - automatically download and install any Provider binary(plugin) for the providers in use within the configuration
@@ -64,3 +64,12 @@ Build infrastructure on AWS
  - support provisioners
  
   
+  
+Command list
+ command: terraform init
+ command: terraform fmt
+ command: terraform validate
+ command: terraform apply
+ command: terraform show
+ command: terraform state
+ command: terraform state list
