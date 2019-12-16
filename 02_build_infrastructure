@@ -1,3 +1,66 @@
 Build infrastructure on AWS
 
-Configuration
+* Configuration
+ - the set of files used to describe infrastructure in Terraform is simply known as a Terraform configuration
+ - the format of the configuration files can be JSON, and other formats
+ - the extension name of configuration file is  '*.tf'
+ 
+* Providers
+ - responsible for creating an managing resources
+ - responsible for translating the API interactions with the service
+ - responsible for understanding API interactions and exposing resources
+ - multiple provider blocks can exist in a Terraform configuration files for multiple providers
+ - profile attribute refers to the AWS or GCP config file
+ 
+* Resources
+ - define a resource that exists within the infrastructure
+ - might be a physical component, such as EC2 instance or logical resource such application, DNS 
+ - almost any infrastructure type of providers can be represented as a resource in Terraform
+ - resource block 
+ 
+     -- resource type
+         a. example: aws_instance
+             the prefixe of the type maps to the provider, such as aws, gcp
+         b. providing resource details
+             https://www.terraform.io/docs/providers/index.html
+ 
+     -- resource name
+     
+* Initalization
+ - command: 'terraform init'
+ - first command to run for a new configuration or  after checking out an existing configuration from version control
+ - initializes various local settings and data that will be used by subsequent commands
+ - automatically download and install any Provider binary(plugin) for the providers in use within the configuration
+
+
+* Formatting and validating configurations
+ - recommend language consistency between files and modules
+ - command: terraform fmt
+   -- enable standardization which automatically updates configurations in the current directory for easy readablility and consistency.
+ - command: terraform validate
+   -- enable to make sure configuration is syntactically valid and internally consistent 
+   -- check and report errors within modules, attribute names, and value types
+   
+* Apply changes
+
+ - command: terraform apply
+ - shows the execution plan created successfully
+ - pause and wait fro approval before proceeding
+ - typy 'yes' to proceed
+ - the state file 'terraform.tfstate' is extremely important
+     -- keep track of the IDs of created resources so that Terraform knows what it is managing.
+     -- recommended to setup remote state such as AWS S3.
+
+ - command: terraform show
+ - show create total resource 
+
+* Manually Managing State
+ - command: terraform state
+   -- used for advanced state management
+ - command: terraform state list
+   -- give a list of resources as addresses and resource IDs
+   
+* Provisioning
+ - support provisioners
+ 
+  
