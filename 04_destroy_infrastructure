@@ -1,1 +1,10 @@
+Destroy
+ - all of the infrastructure resources are removed from the configruation
+ - command: terraform destroy
+   -- first show the execution plan and waits for approval before making any changes
+   -- Terraform determines the order in which things must be destroyed.
+   -- Terraform will destroy resources in a suitable order to respect dependencies
+   
 
+Command list
+  command: terraform destroy
