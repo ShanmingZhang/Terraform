@@ -9,8 +9,11 @@
     - edit /home/user_name/.profile
         add the following line at last 
         -----
-        export PATH="$PATH:terraform_file_path/terraform"
+        export PATH="$PATH:terraform_folder_path"
         -----
+    - update the env 
+      source /home/user_name/.profile
+      
 4. Verifying
     - check 'terraform' command
     - check 'terraform -help' command
