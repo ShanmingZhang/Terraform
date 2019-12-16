@@ -1,1 +1,21 @@
+* Terrafrom builds an execution plan based on your terrafrom configurations changed
+* Only modifies what is nessary to reach your desired state
+* can Not only version control for configuration but also can see the historical state of infrastrucutre evolved over time
+* Terraform first destroyed the existing instance and then created a new one in its place
+
+
+
+
+Command list
+
+    * command: terraform apply
+      Notice that before perform the change, it is a nesscrary to make backup
+
+    * command: terraform show
+      show the newest infrastructure info after changing
+
+    * command: terraform plan
+       - show the changes what is required resource to be replaced
+       - adjust your changes to possibly avoid destory/create/updates
+   
 
