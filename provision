@@ -1,0 +1,89 @@
+How to use provisioners to initialize instances when they are created
+
+Backgroud:
+ - need to do some initial setup on your instances or infrastructure resources
+ - etc. upload files, run shell scripts, or install and trigger other tools and softwares
+ - provisioners can help to finish the works
+ 
+
+* Defining a provisioner
+ - add 'provisioner' block with in 'resource' block
+ - multiple 'provisioner' blocks can be add into 'resource' block
+ - Terraform supports multiple provisioners
+ - local provisioner
+   -- execute a command locally on the machine running terraform
+         -----
+           resource "aws_instance" "example" {
+            ami           = "ami-b374d5a5"
+            instance_type = "t2.micro"
+
+            provisioner "local-exec" {
+              command = "echo ${aws_instance.example.public_ip} > ip_address.txt"
+            }
+           }
+         -----
+ - remote provisioner
+   -- invoke a script on a remote resource after it is created
+   -- used to run a configuration management tool, bootstrap into a cluster. etc.
+   -- must choose an ssh or winrm connection in the form of a connection block within provisioner
+      that makes the machine running terraform connect the created instance machine
+          -----
+            ## for ssh connections
+            resource "aws_key_pair" "example" {
+              key_name = "examplekey"
+              ## nust create a keypair locally to upload to AWS
+              public_key = file("~/.ssh/id_rsa.pub")
+            }
+            
+            ## create vm
+            resource "aws_instance" "web" {
+              ## need the key_name connected to it directly as an attribute
+              key_name = aws_key_pair.example.key_name
+              # ...
+             
+             ## create a conenction block and define the connection detail
+             connection {
+                type     = "ssh"
+                user     = "root"
+                private_key = file("~/.ssh/id_rsa")  ## necessary to successfully provision the host
+                host     = self.ip
+              }
+
+             ## once connection is successful, the remote provisioner will run on the remote machine to install, update,...
+              provisioner "remote-exec" {
+                inline = [
+                  "sudo amazon-linux-extras enable nginx1.12",
+                  "sudo yum -y install nginx",
+                  "sudo systemctl start nginx"
+                ]
+              }
+            }
+         -----
+* Running provisioners
+ - provisioners are only run when a resource is created
+ - command: terraform apply
+
+* Failed provisioners and tainted resources
+ - tainted resources: if a resource successfully creates but fails during provisioning, terraform mark the resource as 'tainted'
+ - tainted resource has been physically created, but cannot be considered safe since provisioning failed
+ - In next execution plan, terraform will remove any tainted resoruces and create new resources, attempting to provision them again after creation
+ 
+* Manually tainting resources
+ - in case you want to manually destroy and recreate a resoruce
+ - Terraform supports to specific a resource to tainting resource
+ - command: terraform taint resource.id  
+   -- etc. terraform taint aws_instance.example
+   -- the command not modify infrastrucute and only modify the state file to mark a resource as tainted resource
+   -- In next execution plan, the specified tainted resource will be destroyed and recreated 
+
+* Destroy provisioners
+ - provisioners can be defined that run only during a destroy operation
+ - useful for performing system cleanup, extracting data. etc
+
+
+Command and key points
+ - resource: provisioner
+ - local provisioner
+ - remote provisioner
+ - tainted resource and solutions
+ - https://www.terraform.io/docs/provisioners/
