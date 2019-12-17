@@ -1,0 +1,77 @@
+Defining variables
+
+variable "region" {
+  default = "us-east-1"
+}
+
+Using variables
+ - var.xxx:  access variable
+provider "aws" {
+  region     = var.region
+}
+
+Assigning variables
+ - from command-line flags
+    -- terraform apply -var 'region=us-east-2'
+   
+ - from a file
+    -- create a file and assign variables within this file
+       file: terraform.tfvars  input: region = "us-east-2"
+    -- Terraform automatically loads these files (terraform.tfvars, *.auto.tfvars) to populate variables
+    
+    -- can also use command line with '-var-file' to specify a file
+       terraform apply -var-file="secret.tfvars" -var-file="production.tfvars"
+ - from environment variables
+ - from UI input 
+ - from variable defaults
+
+Lists
+ - Lists are defined either explicitly or implicitly
+    ---
+    # implicitly by using brackets [...]
+    variable "cidrs" { default = [] }
+
+    # explicitly
+    variable "cidrs" { type = list }
+    ---
+    --
+    terraform.tfvars
+    cidrs = [ "10.0.0.0/16", "10.1.0.0/16" ]
+    --
+  
+Maps
+ - Maps are a way to create variables that are lookup tables
+ - definition
+     -----
+     variable "amis" {
+        type = "map"   ##map type assigned explicitly
+        default = {
+          "us-east-1" = "ami-b374d5a5"
+          "us-west-2" = "ami-4b32be2b"
+        }
+      }
+     -----
+ - usage :  var.name[key]
+     -----
+     resource "aws_instance" "example" {
+      ami           = var.amis[var.region]
+      instance_type = "t2.micro"
+     }
+     -----
+
+Assigning Maps
+- from command line
+  terraform apply -var 'amis={ us-east-1 = "foo", us-west-2 = "bar" }'
+- from files
+  -- define map in *.tf file
+  -- set map's key value for a file *.tfvars
+  -- access map via resource interpolation
+      ---
+      output "ami" {
+        value = aws_instance.example.ami
+      }
+      ---
+  -- access map from command line
+      ---
+      terraform apply -var region=us-west-2
+      ---
