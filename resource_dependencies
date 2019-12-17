@@ -42,3 +42,12 @@
   - 'depends_on' to explicitly declare the dependency
 * Non-Dependent resources does not depend on any other resource, they can be created in parallel with the other resources.
 * Terraform can perform operations concurrently to reduce the total time taken to apply changes
+
+
+Command and key points
+ - Implicit dependencies
+    -- example:
+         instance = aws_instance.example.id
+ - Explicit dependencies 
+    -- example:
+         depends_on = [aws_s3_bucket.example]
