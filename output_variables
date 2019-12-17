@@ -1,0 +1,20 @@
+Outputs are a way to tell Terraform what data is important
+The data is outputed when terraform apply is called
+can be queried using the terraform out command
+
+* defining Outputs
+  - output data is typically dynamic
+  - multiple output blocks can be defined to sepecify multiple output varibales
+    ----
+    output "ip" {
+      value = aws_eip.ip.public_ip
+    }
+    ----
+* Viewing Outputs
+ - run 'terraform apply' to populate the output
+ - run 'terraform outpu xxx' to populate the output value of xxx
+
+Command and key points
+ - command: 
+    terraform output
+    terraform output xxx
