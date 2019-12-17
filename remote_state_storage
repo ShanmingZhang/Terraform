@@ -1,0 +1,9 @@
+Terraform supports team-based workflows with a feature known as remote backends
+Remote backends allow Terraform to use a shared storage space for state data, 
+any member of your team can use Terraform to manage the same infrastructure.
+
+
+Command and key points
+ -  Terraform Cloud
+ - command: terraform init
+ - command: terraform apply
