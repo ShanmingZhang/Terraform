@@ -1,0 +1,46 @@
+Modules are self-contained packages of Terraform configurations
+Modules are used to 
+      - create reusable components, 
+      - improve organization
+      - treat pieces of infrastructure
+
+Terraform Registry
+  - Discover providers for any service, and modules for common infrastructure configurations.
+  
+* Using Modules
+  - module block: tell Terraform to create and manage this module
+  - module input: module supports many additional inputs
+  - 'source' attribute: mandatory argument for modules, tell Terraform where the module can be retrived, Terraform automatically downloads and manages modules for you.
+    ----
+    module "consul" {
+      source      = "hashicorp/consul/aws"
+      num_servers = "3"
+    }
+    
+    module "consul" {
+      source  = "hashicorp/consul/aws"
+      version = "0.7.3"    ## explicitly version number for modules
+
+      servers = 3
+    }
+    ----
+  - add a new module to configuration, it is necessary to 
+    obtian and install the new module's source code with command 'terraform init' or 'terraform init -upgrade'
+  
+* Apply Changes
+  - command: terraform apply
+
+
+* Module Outputs
+ - 
+* Destroy
+ - command: terraform destroy
+
+
+* Commands and key points
+  - Terraform Registry
+  - 'module', 'source'
+  - command: terraform init # only install module and not check module versions
+  - command: terraform init -upgrade   # install module and check for any news versions of existhing modules and providers
+  - command: terraform destroy
+  - command: terraform apply
