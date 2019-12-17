@@ -29,10 +29,16 @@ Terraform Registry
   
 * Apply Changes
   - command: terraform apply
-
-
+  - Modules can be nested to decompose complex systems into manageable components.
+  - The full set of resources created by this module be included and created
 * Module Outputs
- - 
+ - The syntax for referencing module outputs is ${module.NAME.OUTPUT}, where NAME is the module name given in the header of the module configuration block and OUTPUT is the name of the output to reference.
+      ----
+      output "consul_server_asg_name" {
+        value = "${module.consul.asg_name_servers}"
+      }
+      ----
+
 * Destroy
  - command: terraform destroy
 
