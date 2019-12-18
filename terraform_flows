@@ -1,0 +1,5 @@
+* terraform apply:
+   vpc -> subnet -> internet gateway -> network interface -> instance -> elastic IP
+
+* terraform destroy:
+   elastic IP -> instance -> network interface -> subnet -> internet gateway -> vpc
