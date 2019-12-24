@@ -1,0 +1,19 @@
+* locals block: a set of related local values can be decleared together in a single locas block
+  --
+   locals {
+      var_1 = "var_1"
+      var_n = "var_n"
+   }
+   
+   locals {
+     tags = {
+      var_1 = "var_1"
+      var_n = "var_n"
+     }
+   }
+  --
+   local.var_1
+   local.var_n
+   local.tags
+  --
+   
