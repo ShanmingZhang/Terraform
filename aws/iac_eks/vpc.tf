@@ -1,23 +1,14 @@
-resource "aws_vpc" "iac-eks-vpc" {
+resource "aws_vpc" "iac_eks_vpc" {
   cidr_block = var.iac-vpc-cidr-block
-  tags = {
-    Name = var.iac-vpc-name
-  }
-}
-
-resource "aws_subnet" "iac-eks-vpc-subnets" {
-  count = length(var.iac-cidr-block-of-subnets)
-  vpc_id            = aws_vpc.iac-eks-vpc.id
-  cidr_block        = var.iac-cidr-block-of-subnets[count.index]
-  availability_zone = var.iac-subnet-available-zones[count.index]
 
   tags = {
-    Name = var.iac-subnet-names[count.index]
+    Name                                                = var.iac-vpc-name
+    "kubernetes.io/cluster/${var.iac-eks-cluster-name}" = "shared"
   }
+
+
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 }
 
-resource "aws_elasticache_subnet_group" "iac-redis-subnet-group" {
-  name       = var.iac-redis-subnet-group-name
-  subnet_ids = aws_subnet.iac-eks-vpc-subnets[*].id
-}
 

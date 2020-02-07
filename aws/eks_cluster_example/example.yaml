@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  # Deploymentの名前。Namespace内ではユニークである必要があります
+  name: deployment-example
+spec:
+  # レプリカ数の指定
+  replicas: 2
+  # Podのテンプレート(PodTemplate)
+  template:
+    metadata:
+      labels:
+        # ラベル指定は必須
+        app: deployment-example
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.10
+        ports:
+        - containerPort: 80

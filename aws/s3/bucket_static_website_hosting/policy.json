@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+	    "Principal":{
+	      "AWS": "arn:aws:iam::227389759256:user/Shanming.Zhang"
+	    },
+            "Resource": "*"
+        }
+    ]
+}

@@ -4,39 +4,89 @@ variable "iac-var-template" {
   default     = ""
 }
 
-
-# ---
-variable "iac-vpc-name" {
-  description = "Specify the name of vpc"
+variable "iac-eks-worknodes-group-name" {
+  description = ""
   type        = string
-  default     = "iac-eks-vpc"
+  default     = "iac_eks_worknodes_group"
+}
+
+variable "iac-eks-cluster-name" {
+  description = ""
+  type        = string
+  default     = "iac_eks_cluster"
+}
+
+
+variable "iac-gw-name" {
+  description = "Specify the internet gateway of vpc"
+  type        = string
+  default     = "iac_eks_gw"
+}
+
+variable "iac-eks-master-sg-name" {
+  description = "sg for eks master"
+  type        = string
+  default     = "iac_sg_eks_master"
+}
+
+variable "iac-eks-worknodes-sg-name" {
+  description = "sg for eks work nodes"
+  type        = string
+  default     = "iac_sg_eks_worknodes"
+
 }
 
 variable "iac-vpc-cidr-block" {
-  description = "Specify the cidr block of vpc"
+  description = ""
   type        = string
   default     = "192.168.0.0/16"
 }
 
-variable "iac-cidr-block-of-subnets" {
-  description = "Specify the cidr blocks for vpc, the amount of cidr blocks is the same as the amount of disered subnets"
-  type        = list(string)
-  default     = ["192.168.64.0/18", "192.168.128.0/18", "192.168.192.0/18"]
+variable "iac-vpc-name" {
+  description = ""
+  type        = string
+  default     = "iac_eks_vpc"
 }
 
-variable "iac-subnet-available-zones" {
-  description = "Specify the available zones for subnets of vpc"
-  type        = list(string)
-  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
+variable "iac-config-of-subnet-01" {
+  type = object({ name = string, availability_zone = string, cidr_block = string })
+  default = {
+    name              = "iac-eks-vpc-subnet01"
+    availability_zone = "us-east-1a"
+    cidr_block        = "192.168.101.0/24"
+  }
 }
 
-variable "iac-subnet-names" {
-  description = "Specify the names for subnets of vpc"
-  type        = list(string)
-  default     = ["eks-vpc-Subnet01", "eks-vpc-Subnet02", "eks-vpc-Subnet03"]
+variable "iac-config-of-subnet-02" {
+  type = object({ name = string, availability_zone = string, cidr_block = string })
+  default = {
+    name              = "iac-eks-vpc-subnet02"
+    availability_zone = "us-east-1b"
+    cidr_block        = "192.168.102.0/24"
+  }
 }
 
-# ---
+variable "iac-config-of-subnet-03" {
+  type = object({ name = string, availability_zone = string, cidr_block = string })
+  default = {
+    name              = "iac-eks-vpc-subnet03"
+    availability_zone = "us-east-1c"
+    cidr_block        = "192.168.103.0/24"
+  }
+}
+
+variable "iac-config-of-subnet-04" {
+  type = object({ name = string, availability_zone = string, cidr_block = string, smger_ip = string })
+  default = {
+    name              = "iac-eks-vpc-subnet04"
+    availability_zone = "us-east-1d"
+    cidr_block        = "192.168.104.0/24"
+    smger_ip          = "192.168.104.104"
+  }
+}
+
+
+# --- object type --- #
 
 # ---
 variable "iac-redis-cluster-id" {
@@ -76,17 +126,30 @@ variable "iac-redis-subnet-group-name" {
 
 
 # ---
+variable "iac-session-manager-name" {
+  description = ""
+  type        = string
+  default     = "iac-eks-session-manager"
+}
+
 variable "iac-session-manager-role-name" {
   description = "Specify the session manager role name"
   type        = string
   default     = "iac-session-manager-role"
 }
 
-variable "iac-eks-role-name" {
+variable "iac-eks-master-role-name" {
   description = "Specify the eks role name"
   type        = string
   default     = "iac-eks-role"
 }
+
+variable "iac-eks-worknodes-role-name" {
+  description = "Specify the eks worknodes role name"
+  type        = string
+  default     = "iac-eks-worknodes-role"
+}
+
 # ---
 
 
@@ -107,4 +170,11 @@ variable "iac-s3-bucket-name" {
 # ---
 
 
+# ---
+variable "iac-eks-worknodes-profile" {
+  description = ""
+  type        = string
+  default     = "iac_eks_worknodes_profile"
+}
+# ---
 

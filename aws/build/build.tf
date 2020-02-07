@@ -44,3 +44,11 @@ resource "aws_instance" "example" {
   }
 
 }
+
+locals {
+  id = "test"
+}
+
+output "test" {
+  value = locals.id
+}
